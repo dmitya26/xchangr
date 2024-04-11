@@ -1,0 +1,13 @@
+.env
+xchangrvenv
+__pycache__
+api/
+simulator/
+macrostats.py
+todo.txt
+data/
+CONTRIBUTING.md
+hottakes.txt
+notes.txt
+structure.txt
+

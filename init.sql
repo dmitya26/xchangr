@@ -1,0 +1,52 @@
+CREATE TABLE Account (
+	id SERIAL PRIMARY KEY NOT NULL,
+	accountName VARCHAR(100) NOT NULL,
+	IDEN VARCHAR(100) UNIQUE,
+	isFrozen BOOLEAN NOT NULL,
+	isLockdown BOOLEAN NOT NULL,
+	lockdownPassword BYTEA,
+	loans_list VARCHAR(100)[][],
+	debts_cache VARCHAR(100)[][],
+	isCompany BOOLEAN NOT NULL,
+	highProfileFunds BOOLEAN NOT NULL,
+ 	creation_stamp TIMESTAMP NOT NULL
+);
+
+CREATE TABLE Ledger (
+	IDEN VARCHAR(100) NOT NULL,
+	account VARCHAR(100) NOT NULL,
+	amount INTEGER NOT NULL,
+	stamp TIMESTAMP NOT NULL
+);
+
+CREATE TABLE Market (
+	SellerIDEN VARCHAR(100) NOT NULL,
+	SaleFormat VARCHAR(100) NOT NULL,
+	item VARCHAR(100) NOT NULL,
+	amount INTEGER NOT NULL,
+	itemID INTEGER NOT NULL,
+	sellerAccount VARCHAR(100)
+	creation_stamp TIMESTAMP NOT NULL
+);
+
+CREATE TABLE API (
+	id SERIAL PRIMARY KEY NOT NULL,
+	IDEN VARCHAR(100) NOT NULL,
+	KEYS VARCHAR(100)[][],
+	creation_stamp TIMESTAMP NOT NULL,
+	isLockdown BOOLEAN NOT NULL,
+	lockdownPassword BYTEA,
+	isFrozen BOOLEAN
+);
+
+CREATE ROLE usr LOGIN PASSWORD 'roghOEIrhgoEIRHgeoIHGroeihrvvoOERgiheorEORIgo0';
+REVOKE TRUNCATE on ALL TABLES in SCHEMA public FROM usr;
+
+CREATE ROLE admin LOGIN PASSWORD 'soihOGriheoihgPIErghe0rOIEhgoregheJOIEJgoierhgioerg';
+GRANT ALL PRIVILEGES on ALL TABLES in SCHEMA public FROM admin;
+
+CREATE UNIQUE INDEX unique_account ON Account (accountname, IDEN) WHERE (IDEN) IN (
+	SELECT IDEN FROM Account HAVING COUNT(*) > 1
+);
+
+CREATE INDEX hstore_idx ON account USING GIN (inventory);

@@ -1,0 +1,15 @@
+create a main account:
+	create a checking account under main account
+	create a savings account under main account
+
+Invest in a Government Bond
+
+Invest in a Government Stock
+
+Own (and (if you want) invest in) Discord Server Real Estate
+
+You can also build real estate but it takes a long time and costs a lot of Credits
+
+Own and Sell random online things through the platform
+
+Create Online things with factories and materials and sell them
